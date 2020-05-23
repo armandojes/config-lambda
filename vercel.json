@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "alias": ["armandojes"],
+  "rewrites": [
+    {"source": "/api/(.*)",  "destination": "/api/api"},
+    {"source": "/public/(.*)",  "destination": "/$1"},
+    {"source": "(.*)",  "destination": "/api/server_render"}
+  ]
+}
