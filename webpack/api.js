@@ -20,7 +20,7 @@ const config = {
             '@babel/preset-react'
           ]
         }
-      },
+      }
     ]
   },
   resolve: {

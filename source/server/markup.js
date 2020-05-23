@@ -1,4 +1,4 @@
-const markup = (html) => {
+const markup = (html, states) => {
   return `
     <!DOCTYPE html>
     <html lang="es">
@@ -8,8 +8,9 @@ const markup = (html) => {
         <title>Document</title>
       </head>
       <body>
-        <div id="render_target"></div>
+        <div id="render_target">${html}</div>
       </body>
+      <script>${states}<script>
       <script src="http://localhost:8080/app.js"></script>
     </html>
   `

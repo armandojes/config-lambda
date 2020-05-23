@@ -1,11 +1,13 @@
 const path = require('path')
+const isProduction = process.env.NODE_ENV === 'production'
 
 const config = {
   entry: ['regenerator-runtime/runtime', path.resolve(__dirname, '../source/server/index.js')],
   output: {
     path: path.resolve(__dirname, '../api'),
     filename: 'server_render.js',
-    libraryTarget: 'commonjs'
+    libraryTarget: 'commonjs',
+    publicPath: isProduction ? '' : 'http://localhost/'
   },
   mode: 'development',
   module: {
@@ -21,13 +23,20 @@ const config = {
           ]
         }
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        loader: 'file-loader',
+        options: {
+          emitFile: false
+        }
+      }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css'],
+    extensions: ['.js', '.jsx', '.css']
   },
   target: 'node',
-  watch: process.env.NODE_ENV === 'development'
+  watch: !isProduction
 }
 
 module.exports = config
