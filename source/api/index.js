@@ -1,9 +1,8 @@
 import { Router } from 'express'
+import router from './router'
 
-const server = Router()
+const mainRouter = Router()
 
-server.get('*', (request, response) => {
-  response.send(`${request.url}, 'from api'`)
-})
+mainRouter.use('/api', router)
 
-export default server;
+export default mainRouter

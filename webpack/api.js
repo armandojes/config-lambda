@@ -30,7 +30,14 @@ const config = {
     })
   ],
   resolve: {
-    extensions: ['.js']
+    extensions: ['.js'],
+    alias: {
+      hooks: path.resolve(__dirname, '../source/app/hooks'),
+      helpers: path.resolve(__dirname, '../source/app/helpers'),
+      components: path.resolve(__dirname, '../source/app/components'),
+      config: path.resolve(__dirname, '../source/config'),
+      models: path.resolve(__dirname, '../source/api/models')
+    }
   },
   target: 'node',
   watch: process.env.NODE_ENV === 'development'

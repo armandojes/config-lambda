@@ -33,7 +33,14 @@ const config = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css']
+    extensions: ['.js', '.jsx', '.css'],
+    alias: {
+      hooks: path.resolve(__dirname, '../source/app/hooks'),
+      helpers: path.resolve(__dirname, '../source/app/helpers'),
+      components: path.resolve(__dirname, '../source/app/components'),
+      config: path.resolve(__dirname, '../source/config'),
+      models: path.resolve(__dirname, '../source/api/models')
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
