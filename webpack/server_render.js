@@ -1,5 +1,6 @@
 const path = require('path')
-const isProduction = process.env.NODE_ENV === 'production'
+const env = process.env.NODE_ENV
+const webpack = require('webpack')
 
 const config = {
   entry: ['regenerator-runtime/runtime', path.resolve(__dirname, '../source/server/index.js')],
@@ -7,7 +8,7 @@ const config = {
     path: path.resolve(__dirname, '../api'),
     filename: 'server_render.js',
     libraryTarget: 'commonjs',
-    publicPath: isProduction ? '' : 'http://localhost/'
+    publicPath: env === 'development' ? 'http://localhost:8080/public/' : 'http://localhost:3000/public/'
   },
   mode: 'development',
   module: {
@@ -36,7 +37,13 @@ const config = {
     extensions: ['.js', '.jsx', '.css']
   },
   target: 'node',
-  watch: !isProduction
+  watch: env === 'development',
+  plugins: [
+    new webpack.DefinePlugin({
+      ENV: JSON.stringify(process.env.NODE_ENV),
+      publicPath: JSON.stringify(env === 'development' ? 'http://localhost:8080/public' : 'http://localhost:3000/public')
+    })
+  ]
 }
 
 module.exports = config

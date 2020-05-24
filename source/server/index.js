@@ -5,4 +5,4 @@ const server = Router()
 
 server.get('*', rendered)
 
-export default server;
+export default server

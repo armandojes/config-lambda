@@ -1,4 +1,6 @@
 const markup = (html, states) => {
+  console.log('env', ENV)
+
   return `
     <!DOCTYPE html>
     <html lang="es">
@@ -10,8 +12,8 @@ const markup = (html, states) => {
       <body>
         <div id="render_target">${html}</div>
       </body>
-      <script>${states}<script>
-      <script src="http://localhost:8080/app.js"></script>
+      <script>${states}</script>
+      <script src="${publicPath}/app.js"></script>
     </html>
   `
 }

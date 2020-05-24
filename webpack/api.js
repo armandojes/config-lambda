@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 const config = {
   entry: ['regenerator-runtime/runtime', path.resolve(__dirname, '../source/api/index.js')],
@@ -23,8 +24,13 @@ const config = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      ENV: JSON.stringify(process.env.NODE_ENV)
+    })
+  ],
   resolve: {
-    extensions: ['.js', '.jsx', '.css'],
+    extensions: ['.js']
   },
   target: 'node',
   watch: process.env.NODE_ENV === 'development'

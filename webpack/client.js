@@ -1,12 +1,13 @@
 const path = require('path')
-const isProduction = process.env.NODE_ENV === 'production'
+const env = process.env.NODE_ENV
+const webpack = require('webpack')
 
 const config = {
   entry: ['regenerator-runtime/runtime', path.resolve(__dirname, '../source/client.js')],
   output: {
     path: path.resolve(__dirname, '../public'),
     filename: 'app.js',
-    publicPath: isProduction ? '' : 'http://localhost/public'
+    publicPath: env === 'development' ? 'http://localhost:8080/public' : 'http://localhost:3000/public'
   },
   mode: 'development',
   module: {
@@ -26,7 +27,7 @@ const config = {
         test: /\.(png|jpe?g|gif|svg)$/i,
         loader: 'file-loader',
         options: {
-          outputPath: './public'
+          outputPath: '/'
         }
       }
     ]
@@ -34,8 +35,13 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx', '.css']
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      ENV: JSON.stringify(process.env.NODE_ENV)
+    })
+  ],
   target: 'web',
-  watch: !isProduction
+  watch: env === 'development'
 }
 
 module.exports = config

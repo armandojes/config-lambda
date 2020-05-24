@@ -10,7 +10,7 @@
     "build:front": "webpack --config webpack/client.js",
     "watch": "set NODE_ENV=development&& concurrently  \"npm run build:serverrender\" \"npm run build:api\" \"npm run watch:front\" ",
     "server": "vercel dev",
-    "prod": "set NODE_ENV=production&& npm run build:serverrender&& npm run build:api&& npm run build:front"
+    "prod": "set NODE_ENV=production&& npm run build:serverrender&& npm run build:api&& npm run build:front && npm run server"
   },
   "author": "armandojes",
   "license": "ISC",
