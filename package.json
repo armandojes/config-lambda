@@ -4,12 +4,13 @@
   "description": "",
   "main": "/",
   "scripts": {
+    "build:localserver": "webpack --config webpack/local_server.js",
     "build:serverrender": "webpack --config webpack/server_render",
     "build:api": "webpack --config webpack/api.js",
     "watch:front": "webpack-dev-server --config webpack/client.js",
     "build:front": "webpack --config webpack/client.js",
-    "watch": "set NODE_ENV=development&& concurrently  \"npm run build:serverrender\" \"npm run build:api\" \"npm run watch:front\" ",
-    "server": "vercel dev",
+    "watch": "set NODE_ENV=development&& concurrently  \"npm run build:localserver\" \"npm run watch:front\" ",
+    "server": "nodemon build/server",
     "prod": "set NODE_ENV=production&& npm run build:serverrender&& npm run build:api&& npm run build:front && npm run server"
   },
   "author": "armandojes",

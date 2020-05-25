@@ -6,7 +6,7 @@ const router = Router()
 router.use('/security', security)
 
 router.all('*', (request, response) => {
-  response.send(`${request.url} error handler`)
+  response.json({error: true})
 })
 
 export default router
