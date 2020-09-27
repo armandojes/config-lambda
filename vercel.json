@@ -1,4 +1,5 @@
 {
+  "alias": "armandodejesus",
   "version": 2,
   "rewrites": [
     {"source": "/api/(.*)",  "destination": "/api/api"},

@@ -1,54 +1,33 @@
 const path = require('path')
-const env = process.env.NODE_ENV
-const webpack = require('webpack')
+const { merge } = require('webpack-merge')
+const master = require('./master')
+var ip = require('ip')
 
-const config = {
+const config = merge(master, {
   entry: ['regenerator-runtime/runtime', path.resolve(__dirname, '../source/client.js')],
   output: {
     path: path.resolve(__dirname, '../public'),
-    filename: 'app.js',
-    publicPath: env === 'development' ? 'http://localhost:8080/public' : 'http://localhost:3000/public'
+    filename: 'app.js'
   },
-  mode: 'development',
+  devServer: {
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    host: ip.address(),
+    port: 8080,
+    disableHostCheck: true
+  },
   module: {
     rules: [
-      {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        exclude: '/(node_modules)/',
-        options: {
-          presets: [
-            '@babel/preset-env',
-            '@babel/preset-react'
-          ]
-        }
-      },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
         loader: 'file-loader',
         options: {
-          outputPath: '/'
+          emitFile: true
         }
       }
     ]
   },
-  resolve: {
-    extensions: ['.js', '.jsx', '.css'],
-    alias: {
-      hooks: path.resolve(__dirname, '../source/app/hooks'),
-      helpers: path.resolve(__dirname, '../source/app/helpers'),
-      components: path.resolve(__dirname, '../source/app/components'),
-      config: path.resolve(__dirname, '../source/config'),
-      models: path.resolve(__dirname, '../source/api/models')
-    }
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      ENV: JSON.stringify(process.env.NODE_ENV)
-    })
-  ],
   target: 'web',
-  watch: env === 'development'
-}
+  watch: process.env.NODE_ENV === 'development'
+})
 
 module.exports = config

@@ -3,6 +3,7 @@
   "extends": ["standard", "standard-react"],
   "globals": {
     "ENV": "readonly",
-    "publicPath": "readonly"
+    "publicPath": "readonly",
+    "isProduction": "readonly"
   }
 }

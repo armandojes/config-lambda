@@ -1,7 +1,10 @@
 .vercel/
 node_modules/
-public/
 package-lock.json
-/api/
 npm-debug.log
-/build/
+source/
+package.json
+webpack
+.eslintrc
+.gitignore
+.vercel

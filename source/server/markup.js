@@ -13,7 +13,7 @@ const markup = (html, states) => {
         <div id="render_target">${html}</div>
       </body>
       <script>${states}</script>
-      <script src="${publicPath}/app.js"></script>
+      <script src="${publicPath}app.js"></script>
     </html>
   `
 }
